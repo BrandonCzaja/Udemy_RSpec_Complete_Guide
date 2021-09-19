@@ -24,9 +24,23 @@ RSpec.describe 'Card' do
         # Make your first assumption - We assume we will have a card class, so we make an instance of it with the initial value of 'Ace of Spades'
         card = Card.new('Ace of Spades')
         # I expect card.type to equal Ace of Spades. eq is a Matcher
-        expect(card.type).to eq('Ace of Spades') # I could also put equations here => expect(1 + 1).to eq(2)
+        # I could also put equations here => expect(1 + 1).to eq(2)
+        expect(card.type).to eq('Ace of Spades') 
     end
 end
 
 
+=begin
+    - You must work one test at a time
+    - Get the first error, fix it, then get the next error
+    - Errors are good, as long as you are getting new errors you are making progress
+
+
+    - Steps:
+        - Error 1: uninitialized constant Card -> Create Card Class
+        - Error 2: wrong number of arguments (given 1, expected 0) => I have not initialized the class
+        - Error 3: undefined method 'type' for Card => The error is in the expect(card.type), so I return the value of the @type instance variable
+        - Error 4: expected "Ace of Spades", got: nil => Every instance of Card will have a type equal to the argument
+        - Once you get all greens, you then start to refactor your code
+=end
 
