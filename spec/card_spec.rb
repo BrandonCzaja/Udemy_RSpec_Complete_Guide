@@ -1,4 +1,5 @@
-# require_relative '../lib/card.rb'
+require 'rspec/autorun'
+require_relative '../lib/card.rb'
 
 =begin
     --- Notes ---
