@@ -6,6 +6,10 @@ require_relative '../lib/card.rb'
     - Describe is used to describe what is being tested
     - Describe creates an example testing group
     - Tests are known as examples
+    - When writing 'it' statements, describe what it should be doing, not how it is done. Behavioral not technical
+    - Hooks (before) are used to run a block of code at some point during the tests: Before, In Between, After, etc
+    - Hooks (specifically the before hook), will run BEFORE EACH test example
+    - Variables declared in Hook must be an instance variable(@). Local variables don't persist to the next test example
 =end
 
 
@@ -17,19 +21,17 @@ require_relative '../lib/card.rb'
 # Step 6: Logic comes in. Make your assumptions about what you are going to build and build it out: card = Card.new('Ace of Spades') 
 # Step 7: Use the 'expect()' and pass an argument that you want to evaluate: card.type to equal Ace of Spades
 RSpec.describe Card do
-    # Describe the expected behaivor of this thing you are about to build. 
-    # Don't describe how it will be built, only what it does
+    before do
+        @card = Card.new('Ace', 'Spades') # Instanciating a new card for each test
+    end
 
-    # The card will now have a rank and a suit
+    # Direction update: The card will now have a rank and a suit
     it "has a rank" do
-        # Make your first assumption - We assume we will have a card class, so we make an instance of it with the initial value of 'Ace of Spades'
-        card = Card.new('Ace', 'Spades')
-        expect(card.rank).to eq('Ace')
+        expect(@card.rank).to eq('Ace') # If variable is an instance variable I must call it as such
     end
 
     it "has a suit" do
-        card = Card.new('Ace', 'Spades')
-        expect(card.suit).to eq('Spades')
+        expect(@card.suit).to eq('Spades') # If variable is an instance variable I must call it as such
     end
 end
 
@@ -42,9 +44,10 @@ end
 
     - Steps:
         - Error 1: uninitialized constant Card -> Create Card Class
-        - Error 2: wrong number of arguments (given 1, expected 0) => I have not initialized the class
-        - Error 3: undefined method 'type' for Card => The error is in the expect(card.type), so I return the value of the @type instance variable
+        - Error 2: wrong number of arguments (given X, expected Y) => I have not initialized the class with the correct amount of arguments
+        - Error 3: undefined method '<method_name>' for Card => The error is in the expect(card.<method>), so I return the value of the @<method> instance variable
         - Error 4: expected "Ace of Spades", got: nil => Every instance of Card will have a type equal to the argument
+            - This was an earlier error before additional project directions and refactoring
         - Once you get all greens, you then start to refactor your code
 =end
 
