@@ -11,6 +11,7 @@ require_relative '../lib/card.rb'
     - Hooks (specifically the before hook), will run BEFORE EACH test example
     - Variables declared in Hook must be an instance variable(@). Local variables don't persist to the next test example
     - You should always write your tests with the idea that they can run independently from each other and in a random order
+    - The 'let' method is the best way to remove duplication ########################
 =end
 
 =begin
@@ -33,11 +34,23 @@ require_relative '../lib/card.rb'
 =end
 
 RSpec.describe Card do
-    # Ruby Helper Method
-    def card
-        Card.new('Ace', 'Spades')
-    end
+    # Removing Duplication with the 'let' method
+    # 'let' method is from rspec. It takes an argument as a symbol(:)(but when I reference it later in the tests I just use card). That variable is automatically created by rpec. The block to the right of 'let' ({Card.new...}) is the value of the symbol
+    # Advantages of the 'let' method
+        # - Between each example the block will be evaluated separately each time. This isolates tests from each other
+        # - Within a single example, card represents the exact same object, meaning that I can reassign it within the test example
+        # - Lazy loading: The card variable isn't created until card is referenced later in the code. Imagine having 100 tests, but only the last 2 used card. There is no need to make the card variable until those last two tests. If I used the 'before' hook, card would be made for each of those test, even though it wasn't used
 
+    # If you must have card created before each test, which is rare, you can use let! and it will act like the 'before' method
+    let(:card) {Card.new('Ace', 'Spades')}
+
+
+    # Removing Duplication with a Ruby Helper Method
+    # def card
+    #     Card.new('Ace', 'Spades')
+    # end
+
+    # Removing Duplication with the 'before' hook
     # If I use the before block, I have to add @ to all instances of card. Took it off for Ruby Helper Method
     # before do
     #     @card = Card.new('Ace', 'Spades') # Instanciating a new card for each test
