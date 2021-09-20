@@ -10,28 +10,46 @@ require_relative '../lib/card.rb'
     - Hooks (before) are used to run a block of code at some point during the tests: Before, In Between, After, etc
     - Hooks (specifically the before hook), will run BEFORE EACH test example
     - Variables declared in Hook must be an instance variable(@). Local variables don't persist to the next test example
+    - You should always write your tests with the idea that they can run independently from each other and in a random order
+=end
+
+=begin
+    --- Steps ---
+    - Step 1: Access RSpec and the describe method: RSpec.describe
+    - Step 2: Identify what you want to test: Card
+    - Step 3: Create a testing example group: do block
+    - Step 4: Use the 'it' method to write the test output: it "has a rank && it has a suit"
+    - Step 5: Create a 'do block' with a desription of the behvorior of the thing you are going to be building. - No tech, just behavior
+    - Step 6: Logic comes in. Make your assumptions about what you are going to build and build it out: card = Card.new('Ace of Spades') 
+    - Step 7: Use the 'expect()' and pass an argument that you want to evaluate: card.type to equal Ace of Spades
 =end
 
 
-# Step 1: Access RSpec and the describe method: RSpec.describe
-# Step 2: Identify what you want to test: Card
-# Step 3: Create a testing example group: do block
-# Step 4: Use the 'it' method to write the test output: it "has a rank && it has a suit"
-# Step 5: Create a 'do block' with a desription of the behvorior of the thing you are going to be building. - No tech, just behavior
-# Step 6: Logic comes in. Make your assumptions about what you are going to build and build it out: card = Card.new('Ace of Spades') 
-# Step 7: Use the 'expect()' and pass an argument that you want to evaluate: card.type to equal Ace of Spades
+=begin
+    --- Reduce Duplication ---
+    - Use Hooks
+        - 'before' block. Must use @ for instances of variable names
+    - Ruby Helper Methods: The describe block is just a normal ruby block, anything can be done in it
+=end
+
 RSpec.describe Card do
-    before do
-        @card = Card.new('Ace', 'Spades') # Instanciating a new card for each test
+    # Ruby Helper Method
+    def card
+        Card.new('Ace', 'Spades')
     end
+
+    # If I use the before block, I have to add @ to all instances of card. Took it off for Ruby Helper Method
+    # before do
+    #     @card = Card.new('Ace', 'Spades') # Instanciating a new card for each test
+    # end
 
     # Direction update: The card will now have a rank and a suit
     it "has a rank" do
-        expect(@card.rank).to eq('Ace') # If variable is an instance variable I must call it as such
+        expect(card.rank).to eq('Ace') # If variable is an instance variable I must call it as such
     end
 
     it "has a suit" do
-        expect(@card.suit).to eq('Spades') # If variable is an instance variable I must call it as such
+        expect(card.suit).to eq('Spades') # If variable is an instance variable I must call it as such
     end
 end
 
