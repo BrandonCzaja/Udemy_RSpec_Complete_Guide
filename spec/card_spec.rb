@@ -64,6 +64,12 @@ RSpec.describe Card do
     it "has a suit" do
         expect(card.suit).to eq('Spades') # If variable is an instance variable I must call it as such
     end
+
+    # To create a custom error message, pass a string as the second argument to the 'to' method
+    it "has a custom error message" do
+        comparison = 'Spade'
+        expect(card.suit).to eq(comparison), "Hey, I expected #{comparison} but got #{card.suit} instead!"
+    end
 end
 
 
