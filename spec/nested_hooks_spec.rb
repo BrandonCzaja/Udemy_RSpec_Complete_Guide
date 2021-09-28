@@ -1,6 +1,6 @@
 RSpec.describe 'nested hooks' do
     before(:context) do
-        puts 'OUTER Before context: runs 1st'
+        puts 'OUTER Before context'
     end
 
     # All outer level befores are valid in inner level context. DOES NOT WORK THE OTHER WAY AROUND
