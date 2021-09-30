@@ -26,4 +26,4 @@ end
 # If your class is more involved, it takes more setup
 
 
-# 'subject' acts like the 'like' keyword. It lazily loads (only when it is needed)
+# 'subject' acts like the 'let' keyword. It lazily loads (only when it is needed)
