@@ -20,4 +20,25 @@ RSpec.describe 'equality matchers' do
             expect(a).not_to eql(b)
         end
     end
+
+    # equal: equal and 'be' are the exact same thing
+    describe 'equal and be matcher' do
+        let(:c) {[1,2,3]}
+        let(:d) {[1,2,3]}
+        let(:e) {c}
+
+        it 'cares about object identity' do
+            expect(c).to eq(d)
+            expect(c).to eql(d)
+
+            # expect(c).to equal(d) => This will fail. They are equal arrays, but different addresses in memory, different identity
+
+            # This passes
+            expect(c).to equal(e)
+            expect(c).to be(e) # Same as the line above
+
+            # not_to
+            expect(c).not_to equal(d)
+        end
+    end
 end
