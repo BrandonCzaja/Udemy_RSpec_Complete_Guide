@@ -25,3 +25,7 @@ RSpec.describe 'change matcher' do
 end
 
 # It checks the length of the array => pushes the value => then checks it again
+
+
+
+# You can also use this to make sure a method DOESN'T change state by useing by(0)
