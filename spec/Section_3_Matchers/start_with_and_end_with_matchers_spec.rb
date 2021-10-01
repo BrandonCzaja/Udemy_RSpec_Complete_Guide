@@ -36,8 +36,8 @@ RSpec.describe 'start_with and end_with matchers' do
 
         it {is_expected.to start_with(:a,:b, :c)}
     end
-
 end
 
 # For strings it looks for a substring
 # For arrays it looks for specific order of elements
+# It does not work with numbers
