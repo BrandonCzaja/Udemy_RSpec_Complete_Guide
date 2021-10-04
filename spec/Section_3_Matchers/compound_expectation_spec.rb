@@ -6,7 +6,7 @@ RSpec.describe 25 do
         expect(subject).to be > 20
     end
 
-    #  And keyword
+    #  And method
 
     it 'can test multiple matchers using the AND keyword' do
         expect(subject).to be_odd and be > 20
@@ -22,7 +22,7 @@ RSpec.describe 'caterpillar' do
     end
 end
 
-
+# Or Method
 RSpec.describe [:usa, :canada, :mexico] do
     # Sample extracts one random value from the array
     it 'can check for multiple possibilities' do
