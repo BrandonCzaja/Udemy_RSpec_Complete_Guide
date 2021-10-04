@@ -15,6 +15,8 @@ RSpec.describe 'satisfy matcher' do
 
     # You should always pass a string to satisfy - The errors will be clearer
     it 'can accept a custom error message' do
+        # The satisfy matcher block must return a boolean
+        # value is subject defined above
         expect(subject).to satisfy('be a palindrome') do |value|
             value == value.reverse
         end
