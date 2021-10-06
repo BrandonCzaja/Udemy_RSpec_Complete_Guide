@@ -39,9 +39,10 @@ class Movie
     # When testing the Movie class, all we want to test is that start_filming is able to communicate with Actor. We don't care how actor does it, just that Movie can tell Actor to do it
     def start_filming
         if actor.ready?
-            puts actor.act
-            puts actor.fall_off_ladder
-            puts actor.light_on_fire
+            actor.act
+            actor.fall_off_ladder
+            actor.light_on_fire
+            actor.act 
         end
     end
 end
@@ -61,11 +62,27 @@ RSpec.describe Movie do
 
     describe '#start_filming method' do
         it 'expects an actor to do 3 actions' do
-            expect(stuntman).to receive(:ready?)
-            expect(stuntman).to receive(:act)
-            expect(stuntman).to receive(:fall_off_ladder)
-            expect(stuntman).to receive(:light_on_fire)
-            subject.start_filming # Subject is the Movie instance. We want to validate that the Actor receives to methods
+            # Different ways to make sure the method runs exactly once
+            # expect(stuntman).to receive(:light_on_fire).once
+            # expect(stuntman).to receive(:light_on_fire).exactly(1).times
+            expect(stuntman).to receive(:light_on_fire).at_most(1).times
+
+
+            # When testing a method that runs multiple times
+            # expect(stuntman).to receive(:act).twice ---> This is as high as rspec goes for nums, use exactly for more
+            # expect(stuntman).to receive(:act).exactly(2).times
+            expect(stuntman).to receive(:act).at_least(1).times
+
+
+            # LESSON #51
+            # expect(stuntman).to receive(:ready?)
+            # expect(stuntman).to receive(:act)
+            # expect(stuntman).to receive(:fall_off_ladder)
+            # expect(stuntman).to receive(:light_on_fire)
+            subject.start_filming # Subject is the Movie instance. We want to validate that the Actor receives methods
         end
     end
 end
+
+
+# If you write the expectations before running the method it is known as BDD (Behavior driven development)
