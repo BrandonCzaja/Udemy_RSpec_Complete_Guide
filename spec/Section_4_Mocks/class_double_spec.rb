@@ -26,6 +26,7 @@ end
 RSpec.describe CardGame do
     it 'can only implement class methods that are defined on a class' do
         # As_stubbed_const changes all calls from the Class to the double
+        # If the othe class isn't made yet, you can pass it as a string ("Deck")
         deck_class = class_double(Deck, build: ["Ace", "Queen"]).as_stubbed_const
 
         expect(deck_class).to receive(:build)
